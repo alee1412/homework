@@ -73,3 +73,11 @@ with open(filepath, newline="") as csvfile:
     print("Greatest Decrease in Revenue: " + "$" + str(lowest(new_change, d)))
 
 #Exporting to txt file
+
+text_file = open("Main.txt", "w")
+text_file.write("Financial Analysis \n")
+text_file.write("**************************** \n")
+text_file.write("Total Months: " + str(months) + " Months \n")
+text_file.write("Average Revenue Change: " + "$" + str(average_monthly_change) + " \n")
+text_file.write("Greatest Increase in Revenue: " + "$" + str(largest(new_change, i)) + " \n")
+text_file.write("Greatest Decrease in Revenue: " + "$" + str(lowest(new_change, d)))
