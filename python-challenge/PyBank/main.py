@@ -70,6 +70,6 @@ with open(filepath, newline="") as csvfile:
     def lowest(new_change, d):
         return min(new_change)
 
-    print("Greatest Decrease in Revenue " + "$" + str(lowest(new_change, d)))
+    print("Greatest Decrease in Revenue: " + "$" + str(lowest(new_change, d)))
 
 #Exporting to txt file
