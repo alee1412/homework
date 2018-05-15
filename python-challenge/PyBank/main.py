@@ -7,13 +7,16 @@ filepath = os.path.join("budget_data_1.csv")
 with open(filepath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
 
+    print("Financial Analysis")
+    print("**************************************")
+
     total_months = []
 
     for row in csvreader:
         total_months.append(row[0]) 
 
     months = (len(total_months) - 1)
-    print(months)
+    print("Total Months: " + str(months) + " Months")
 
 #Total Revenue
 with open(filepath, newline="") as csvfile:
@@ -24,7 +27,7 @@ with open(filepath, newline="") as csvfile:
     for revenue in csvreader:
         if revenue[1] != "Revenue":
             total_revenue = total_revenue + int(revenue[1])
-    print(total_revenue)
+    print("Total Revenue: " + "$" + str(total_revenue))
 
 #Average Change in revenue
 with open(filepath, newline="") as csvfile:
@@ -36,7 +39,7 @@ with open(filepath, newline="") as csvfile:
         average_change.append(row[1])
     average_change.pop(0)
     average_change = list(map(int, average_change))
-    #print (average_change)
+    #print(average_change)
     
     new_change = []
     change = 0
@@ -47,7 +50,7 @@ with open(filepath, newline="") as csvfile:
     #print(new_change)
 
     average_monthly_change = sum(new_change)/len(new_change)
-    print(average_monthly_change)
+    print("Average Revenue Change: " + "$" + str(average_monthly_change))
 
 #Greatest increase in revenue (date and month)
 
@@ -57,9 +60,7 @@ with open(filepath, newline="") as csvfile:
     def largest(new_change, i):
         return max(new_change)
 
-    print(largest(new_change, i))
-
-
+    print("Greatest Increase in Revenue: " + "$" + str(largest(new_change, i)))
 
 #Greatest decrease in revenue (date and month)
     
@@ -69,4 +70,14 @@ with open(filepath, newline="") as csvfile:
     def lowest(new_change, d):
         return min(new_change)
 
-    print(lowest(new_change, d))
+    print("Greatest Decrease in Revenue: " + "$" + str(lowest(new_change, d)))
+
+#Exporting to txt file
+
+text_file = open("Main.txt", "w")
+text_file.write("Financial Analysis \n")
+text_file.write("**************************** \n")
+text_file.write("Total Months: " + str(months) + " Months \n")
+text_file.write("Average Revenue Change: " + "$" + str(average_monthly_change) + " \n")
+text_file.write("Greatest Increase in Revenue: " + "$" + str(largest(new_change, i)) + " \n")
+text_file.write("Greatest Decrease in Revenue: " + "$" + str(lowest(new_change, d)))
