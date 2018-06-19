@@ -1,13 +1,4 @@
-,Unnamed: 0,State,City,"Violent
-crime","Murder and
-nonnegligent
-manslaughter","Forcible
-rape",Robbery,"Aggravated
-assault","Property
-crime",Burglary,"Larceny-
-theft","Motor
-vehicle
-theft",Arson1,Overall Crime
+,Unnamed: 0,,City,Violent crime,Murder and nonnegligent manslaughter,Forcible rape,Robbery,Aggravated assault,Property crime,Burglary,Larceny-theft,Motor vehicle theft,Arson,Overall Crime
 0,5,,Aliso Viejo,30,0,2,8,20,437,75,349,13,2,941
 1,8,,Anaheim,1281,15,105,446,715,8493,1410,5964,1119,26,19582
 2,44,,Brea,58,0,1,27,30,1419,202,1156,61,2,3000
