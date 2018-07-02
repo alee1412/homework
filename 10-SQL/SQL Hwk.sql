@@ -76,17 +76,11 @@ SHOW CREATE TABLE address;
 SELECT * FROM address;
 
 -- 6A JOIN staff and address tables and show first & last name, and address
-SELECT * FROM staff;
-SELECT * FROM address;
-
 SELECT staff.first_name, staff.last_name, address.address
 FROM staff
 INNER JOIN address ON staff.address_id = address.address_id;
 
 -- 6B JOIN staff and payment tables for total amount rung up by each staff member in August of 2005
-SELECT * FROM staff;
-SELECT * FROM payment;
-
 SELECT staff.staff_id, staff.first_name, staff.last_name, SUM(amount) AS 'Total Sales in August 2005'
 FROM payment
 INNER JOIN staff ON payment.staff_id = staff.staff_id
@@ -94,21 +88,48 @@ WHERE payment.payment_date >= '2005-08-01 00:00:00' AND payment.payment_date <='
 GROUP BY payment.staff_id;
 
 -- 6C JOIN film_actor and film and list each film and number of actors who are listed for that film
-SELECT * FROM film_actor;
-SELECT * FROM film;
-
 SELECT COUNT(film_actor.film_id) AS 'Total actors in film', film.title
 FROM film_actor
 INNER JOIN film ON film_actor.film_id = film.film_id
 GROUP BY film.title;
 
 -- 6D How many copies of Hunchback Impossible exist in the inventory
-SELECT * FROM inventory;
-SELECT * FROM film;
-
 SELECT film.film_id, COUNT(inventory.inventory_id) AS 'Total Inventory', film.title
 FROM inventory
 INNER JOIN film ON film.film_id = inventory.film_id
 WHERE film.title = 'Hunchback Impossible'
 GROUP BY film.title;
+
+-- 6E Join payment and customer, list total paid by each customer, and list customers alphabetically by last name
+SELECT customer.last_name, customer.first_name, SUM(payment.amount) AS 'Total Spent'
+FROM payment
+INNER JOIN customer ON payment.customer_id = customer.customer_id
+GROUP BY customer.last_name;
+
+-- 7A Using sub-queries display the titles of movies starting with the letters K and Q whose language is English
+SELECT first_name, last_name
+FROM actor
+WHERE actor_id IN
+(
+  SELECT actor_id
+  FROM film_actor
+  WHERE film_id IN
+  (
+   SELECT film_id
+   FROM film
+   WHERE title = 'ALTER VICTORY'
+  )
+);
+
+SELECT title
+FROM film
+WHERE language_id IN 
+(
+	SELECT language_id
+    FROM language
+    WHERE name = 'English'
+)
+AND title LIKE 'k%' OR title LIKE 'q%';
+
+-- 7B Display all actors who appear in film Alone Trip
 
