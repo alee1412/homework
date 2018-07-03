@@ -107,20 +107,6 @@ INNER JOIN customer ON payment.customer_id = customer.customer_id
 GROUP BY customer.last_name;
 
 -- 7A Using sub-queries display the titles of movies starting with the letters K and Q whose language is English
-SELECT first_name, last_name
-FROM actor
-WHERE actor_id IN
-(
-  SELECT actor_id
-  FROM film_actor
-  WHERE film_id IN
-  (
-   SELECT film_id
-   FROM film
-   WHERE title = 'ALTER VICTORY'
-  )
-);
-
 SELECT title
 FROM film
 WHERE language_id IN 
@@ -132,4 +118,92 @@ WHERE language_id IN
 AND title LIKE 'k%' OR title LIKE 'q%';
 
 -- 7B Display all actors who appear in film Alone Trip
+SELECT first_name, last_name
+FROM actor
+WHERE actor_id in
+(
+	SELECT actor_id
+    FROM film_actor 
+    WHERE film_id IN
+    (
+		SELECT film_id 
+        FROM film
+        WHERE title = 'Alone Trip'
+	)
+);
 
+-- 7C Use JOIN to find all the names and email address of all Canadian customers
+SELECT customer.email, country.country
+FROM customer
+INNER JOIN address ON customer.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country ON city.country_id = country.country_id
+WHERE country.country = 'Canada';
+
+SELECT customer.email, country.country
+FROM customer, address, city, country
+WHERE customer.address_id = address.address_id
+AND address.city_id = city.city_id
+AND city.country_id = country.country_id
+AND country.country = 'Canada';
+
+-- 7D Identify all movies categorized as Family Films
+SELECT film.title, film.rating, category.name
+FROM  film
+INNER JOIN film_category ON film.film_id = film_category.film_id
+INNER JOIN category ON film_category.category_id = category.category_id
+WHERE category.name = 'Family';
+
+SELECT film.title, film.rating, category.name
+FROM film, film_category, category
+WHERE film.film_id = film_category.film_id
+AND film_category.category_id = category.category_id
+AND category.name = 'Family';
+
+-- 7E Display the most frequently rented movies in descending order
+SELECT film.title, COUNT(rental.inventory_id) AS 'Times Rented'
+FROM film
+INNER JOIN inventory ON film.film_id = inventory.film_id
+INNER JOIN rental ON inventory.inventory_id = rental.inventory_id
+GROUP BY film.title
+ORDER BY COUNT(rental.inventory_id) DESC;
+
+-- 7F Write a query to display how much business, in dollars, each store brought in 
+SELECT staff.store_id, SUM(amount) AS 'Total Sales By Store'
+FROM payment
+LEFT JOIN staff ON payment.staff_id = staff.staff_id
+GROUP BY staff.store_id;
+
+-- 7G Write a query to display for each store its Store ID, city, and Country
+SELECT store.store_id AS 'Store ID', city.city AS 'City', country.country AS 'Country'
+FROM store
+INNER JOIN address ON store.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country ON city.country_id = country.country_id;
+
+-- 7H List the top 5 genres in gross revenue
+SELECT category.name AS 'Category', SUM(amount) AS 'Gross Revenue'
+FROM category
+INNER JOIN film_category ON category.category_id = film_category.category_id
+INNER JOIN inventory ON film_category.film_id = inventory.film_id
+INNER JOIN rental ON inventory.inventory_id = rental.inventory_id
+INNER JOIN payment ON rental.rental_id = payment.rental_id
+GROUP BY category.name
+ORDER BY SUM(amount) DESC LIMIT 5;
+
+-- 8A Create a view of 7H
+CREATE VIEW top_five_genres AS
+SELECT category.name AS 'Category', SUM(amount) AS 'Gross Revenue'
+FROM category
+INNER JOIN film_category ON category.category_id = film_category.category_id
+INNER JOIN inventory ON film_category.film_id = inventory.film_id
+INNER JOIN rental ON inventory.inventory_id = rental.inventory_id
+INNER JOIN payment ON rental.rental_id = payment.rental_id
+GROUP BY category.name
+ORDER BY SUM(amount) DESC LIMIT 5; 
+
+-- 8B Display the view created in 8A
+SELECT * FROM top_five_genres;
+
+-- 8C Delete 
+DROP VIEW top_five_genres;
