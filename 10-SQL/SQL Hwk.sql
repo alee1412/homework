@@ -1,3 +1,4 @@
+USE sakila;
 SELECT * FROM actor;
 
 -- 1A Display the first and last name
