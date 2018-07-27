@@ -53,8 +53,14 @@ def scrape():
     weather_html = browser.html
     weather_soup = bs(weather_html, 'html.parser')
 
-    mars_weather = weather_soup.find('p', class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text").text
+    mars_twitter = weather_soup.find_all('p', class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text")
+    
+    mars_weather = []
+    for twitter in mars_twitter:
+        if "Sol" in str(twitter):
+            mars_weather.append(twitter.text)
 
+    mars_weather[0]
     # # Mars Facts
 
     chrome_driver = {'executable_path': 'chromedriver.exe'}
@@ -127,7 +133,7 @@ def scrape():
         "news_title": news_title,
         "news_p": news_p,
         "featured_image_url": featured_image_url,
-        "mars_weather": mars_weather,
+        "mars_weather": mars_weather[0],
         "fact_table": table_html,
         "hemisphere_urls": hemisphere_urls
     }

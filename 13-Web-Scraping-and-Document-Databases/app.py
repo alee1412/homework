@@ -5,9 +5,27 @@ import scrape_mars
 
 app = Flask(__name__)
 
-app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_db"
-mongo = PyMongo(app)
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/"
+# mongo = PyMongo(app)
+
+conn = pymongo.MongoClient("mongodb://localhost:27017/")
+db = conn["database"]
+
+collection = db["mars"]
+
+@app.route("/")
+def home():
+    data = collection.find_one()
+
+    return render_template("index.html", data=data)
 
 @app.route("/scrape")
 def scrape():
-    mars = scrape_mars.scrape()
+    scrape_update = scrape_mars.scrape()
+
+    collection.insert_one(scrape_update)
+
+    return redirect("/", code=302)
+
+if __name__ == "__main__":
+    app.run(debug=True)
