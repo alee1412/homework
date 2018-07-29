@@ -12,7 +12,7 @@ import pandas as pd
 def scrape():
     # # Mars Headline
     chrome_driver = {'executable_path': 'chromedriver.exe'}
-    browser = Browser('chrome', **chrome_driver, headless=False)
+    browser = Browser('chrome', **chrome_driver, headless=True)
 
     nasa_url = 'https://mars.nasa.gov/news'
     browser.visit(nasa_url)
@@ -25,8 +25,8 @@ def scrape():
 
     # # JPL Image
 
-    chrome_driver = {'executable_path': 'chromedriver.exe'}
-    browser = Browser('chrome', **chrome_driver, headless=False)
+    # chrome_driver = {'executable_path': 'chromedriver.exe'}
+    # browser = Browser('chrome', **chrome_driver, headless=False)
 
     jpl_url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
     browser.visit(jpl_url)
@@ -44,8 +44,8 @@ def scrape():
 
     # # Mars Weather
 
-    chrome_driver = {'executable_path': 'chromedriver.exe'}
-    browser = Browser('chrome', **chrome_driver, headless=False)
+    # chrome_driver = {'executable_path': 'chromedriver.exe'}
+    # browser = Browser('chrome', **chrome_driver, headless=False)
 
     weather_url = "https://twitter.com/marswxreport?lang=en"
     browser.visit(weather_url)
@@ -63,8 +63,8 @@ def scrape():
     mars_weather[0]
     # # Mars Facts
 
-    chrome_driver = {'executable_path': 'chromedriver.exe'}
-    browser = Browser('chrome', **chrome_driver, headless=False)
+    # chrome_driver = {'executable_path': 'chromedriver.exe'}
+    # browser = Browser('chrome', **chrome_driver, headless=False)
 
     facts_url = "https://space-facts.com/mars/"
     browser.visit(facts_url)
@@ -94,8 +94,8 @@ def scrape():
 
     # # Mars Hemispheres
 
-    chrome_driver = {'executable_path': 'chromedriver.exe'}
-    browser = Browser('chrome', **chrome_driver, headless=False)
+    # chrome_driver = {'executable_path': 'chromedriver.exe'}
+    # browser = Browser('chrome', **chrome_driver, headless=False)
 
     usgs_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     browser.visit(usgs_url)
@@ -137,5 +137,4 @@ def scrape():
         "fact_table": table_html,
         "hemisphere_urls": hemisphere_urls
     }
-
     return mars_dict
