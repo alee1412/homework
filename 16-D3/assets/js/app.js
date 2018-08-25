@@ -346,6 +346,8 @@ function visualize(theData) {
                         curY = name; 
                         //Change the min and max of y axis
                         yMinMax();
+                        //Update the domain of y
+                        yScale.domain([yMin, yMax]);
                         //Update the y axis
                         svg.select('.yAxis').transition(200).call(yAxis);
                         //With the axis changed, change location of circles
@@ -353,11 +355,13 @@ function visualize(theData) {
                             d3
                                 .select(this)
                                 .transition()
-                                .attr('cx', function(d) {
-                                    return yScale(d[curX]);
+                                .attr('cy', function(d) {
+                                    return yScale(d[curY]);
                                 })
                                 .duration(200);
                         });
+                            
+                        
                         //Change classes to active and the clicked label
                         labelChange(axis, self);
                     }
