@@ -1,5 +1,5 @@
 //defining width
-var width = parseInt(d3.select('#scatter').style('width'));
+var width = parseInt(d3.select('#scatter').style("width"));
 
 //defining height
 var height = width - width/3.9;
@@ -162,7 +162,7 @@ function visualize(theData) {
                 theX = '<div>' + curX + ': ' + d[curX] + '%</div>'
             }
             else {
-                theX = '<div>' + curX + ': ' + parseFloat(d[curX]).toLocaleString('eng') + '</div>';
+                theX = '<div>' + curX + ': ' + parseFloat(d[curX]).toLocaleString('en') + '</div>';
             }
             //Display what we capture
             return theState + theX + theY 
@@ -248,7 +248,7 @@ function visualize(theData) {
 
     svg
         .append('g')
-        .call('yAxis')
+        .call(yAxis)
         .attr('class', 'yAxis')
         .attr('transform', 'translate(' + (margin + labelArea) + ', 0)');
 
@@ -326,7 +326,7 @@ function visualize(theData) {
                         //Update the domain of x
                         xScale.domain([xMin, xMax]);
 
-                        svg.select('.xAxis').transition().duration(200).call(xAxis)
+                        svg.select('.xAxis').transition().duration(200).call(xAxis);
 
                         //Axis change, change location of circles
                         d3.selectAll('circle').each(function() {
@@ -338,16 +338,34 @@ function visualize(theData) {
                                 })
                                 .duration(200);
                         });
-                        //Change classes to active and the clicked label
+
+                        d3.selectAll('.stateText').each(function() {
+                            d3
+                                .select(this)
+                                .transition()
+                                .attr('dx', function(d) {
+                                    return xScale(d[curX]);
+                                })
+                                .duration(200);
+                        });
+                        //Change the classes of active and the clicked label
                         labelChange(axis, self);
+
                     }
+
                     else {
                         //When y is clicked do this
                         curY = name; 
                         //Change the min and max of y axis
                         yMinMax();
+<<<<<<< HEAD
                         //Update the domain of y
                         yScale.domain([yMin, yMax]);
+=======
+
+                        //Update the Domain of Y
+                        yScale.domain([yMin, yMax])
+>>>>>>> d6ed7c6a18680ac64f4b63de0d5c5fad9caf8e26
                         //Update the y axis
                         svg.select('.yAxis').transition(200).call(yAxis);
                         //With the axis changed, change location of circles
@@ -357,6 +375,19 @@ function visualize(theData) {
                                 .transition()
                                 .attr('cy', function(d) {
                                     return yScale(d[curY]);
+<<<<<<< HEAD
+=======
+                                })
+                                .duration(200);
+                        });
+
+                        d3.selectAll('.stateText').each(function() {
+                            d3
+                                .select(this)
+                                .transition()
+                                .attr('dy', function(d) {
+                                    return yScale(d[curY]) + circRadius/3;
+>>>>>>> d6ed7c6a18680ac64f4b63de0d5c5fad9caf8e26
                                 })
                                 .duration(200);
                         });
@@ -366,5 +397,5 @@ function visualize(theData) {
                         labelChange(axis, self);
                     }
                 }
-            })
+            });
 }
