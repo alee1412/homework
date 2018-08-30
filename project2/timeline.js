@@ -3,7 +3,7 @@
 
   // note that months are zero-based in the JavaScript Date object
   var items = new vis.DataSet([
-    {id: 'A', content: '', start: '2007-12-31', end: '2009-06-01', type: 'background', className: 'recession'},
+    {id: 'A', content: 'Recession', start: '2007-12-31', end: '2009-06-01', type: 'background'},
     {id: 'B', content: 'Occupy Wall Street', start: '2011-9-17', end: '2012-01-01', type: 'background'},
     {id: 'C', content: 'Government shuts down from 1-16th due to ACA', start: '2013-01-01', end: '2013-01-16', type: 'background'},    
 
@@ -133,7 +133,7 @@
     {start: new Date(2017, 6, 1),  content: 'Trump announces intentions to withdraw the US from Paris Agreement'},
     {start: new Date(2017, 6, 14),  content: 'Fed Raises rates for a record second time and rates are at highest levels since 2008'},
     {start: new Date(2017, 9, 5),  content: 'Deferred Action for Childhood Arrivals, DACA, will be scrapped'},
-    {start: new Date(2017, 9, 18),  content: 'Toys R Us files for Bankruptcy'},
+    {start: new Date(2017, 9, 18),  content: 'Toys “R” Us files for Bankruptcy'},
     {start: new Date(2017, 11, 13),  content: 'Senate passes Tax Cuts and Jobs Act of 2017, 2nd, Fed raises interest rates for 3rd time '},
     {start: new Date(2017, 12, 14),  content: 'Disney announces it will buy 21st Century Fox for $52.4B, Net neutrality repealed'},
     {start: new Date(2017, 12, 18),  content: 'Trump announces climate change is dropped as a national security threat '},
