@@ -155,7 +155,7 @@
     {id: 139, group: 0, start: new Date(2018, 5, 31),  content: 'Trump admin announces tariffs on EU, Mexico, and Canada on the steel 25% and aluminum 10%'},
     {id: 140, group: 1, start: new Date(2018, 6, 25),  content: 'Harley-Davidson that it will shift some production outside the US due to tariffs'},
     {id: 141, group: 0, start: new Date(2018, 7, 6),  content: 'US Tariffs on China begin and China announces immediate retaliatory tariffs'},
-    {id: 142, group: 0, start: new Date(8, 1, 2018),  content: 'US Department of Commerce applies tariffs on Canadian newsprint'},
+    {id: 142, group: 0, start: new Date(2018, 8, 1),  content: 'US Department of Commerce applies tariffs on Canadian newsprint'},
     {id: 143, group: 0, start: new Date(),  content: ''},
 
     // {start: new Date(1945,3,16), content: 'Battle of Berlin - End of the Third Reich'}
@@ -169,7 +169,7 @@
     editable: false,
     type: 'point',
     showMajorLabels: true, //changes whether year shows up or not
-    // autoResize: true
+    autoResize: true
   };
 
   var container = document.getElementById('visualization');
